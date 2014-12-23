@@ -1,2 +1,6 @@
-<h1>Task#list,</h1>
-<p>Find me in app/views/task/list,.html.erb</p>
+<h1>All TODO Tasks</h1>
+<ul>
+  <% @tasks.each do |tsk| %>
+    <li><%= tsk.name %></li>
+  <% end %>
+</ul>

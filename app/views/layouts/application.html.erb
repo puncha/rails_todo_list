@@ -9,9 +9,9 @@
 <body>
 <nav>
   <ul>
-    <li><%= link_to 'View all tasks' %></li>
-    <li><%= link_to 'View uncompleted tasks' %></li>
-    <li><%= link_to 'View completed tasks' %></li>
+    <li><%= link_to 'View all tasks', controller:'task', action:'list', filter:'all' %></li>
+    <li><%= link_to 'View uncompleted tasks', controller:'task', action:'list', filter:'uncompleted' %></li>
+    <li><%= link_to 'View completed tasks', controller:'task', action:'list', filter:'completed' %></li>
   </ul>
 </nav>
 <%= yield %>
