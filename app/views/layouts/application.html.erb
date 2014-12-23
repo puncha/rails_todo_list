@@ -7,7 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<nav>
+  <ul>
+    <li><%= link_to 'View all tasks' %></li>
+    <li><%= link_to 'View uncompleted tasks' %></li>
+    <li><%= link_to 'View completed tasks' %></li>
+  </ul>
+</nav>
 <%= yield %>
 
 </body>
