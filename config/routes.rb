@@ -1,19 +1,17 @@
 Rails.application.routes.draw do
 
-  get 'task/index'
-
-  get 'task/list'
-  get 'task/show'
-
-  get 'task/new'
-  post 'task/create'
-
-  get 'task/delete'
-  delete 'task/destroy'
-  get 'task/edit'
-  patch 'task/update'
+  get    'task/index'
+  get    'task/list'
+  get    'task/show'
+  get    'task/new'
+  post   'task/create'
+  get    'task/edit'
+  post   'task/update'
+  get 'task/delete' # TODO: Better to change it to verb 'DELETE'
 
   root 'entry#index'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

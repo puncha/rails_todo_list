@@ -6,8 +6,8 @@ class TaskController < ApplicationController
     filter = params[:filter] || 'all'
     case filter
       when 'all' then @tasks = Task.all
-      when 'completed' then @tasks = Task.where completed: true
-      when 'uncompleted' then @tasks = Task.where completed: false
+      when 'completed' then @tasks = Task.completed
+      when 'uncompleted' then @tasks = Task.uncompleted
     end
   end
 
@@ -28,17 +28,30 @@ class TaskController < ApplicationController
     end
   end
 
-
-  def delete
-  end
-
-  def destroy
+  def edit
+    id = params[:id]
+    @task = Task.find id
   end
 
   def update
+    task = Task.find params[:id]
+    if task.update_attributes task_params
+      flash[:notice] = 'Task is updated.'
+      redirect_to action:'list'
+    else
+      flash[:errors] = ["Failed to update task '#{task_params[:name]}'."]
+      render 'update'
+    end
   end
 
-  def edit
+  def delete
+    @task = Task.find params[:id]
+    if @task.destroy
+      flash[:notice] = 'Task is updated.'
+    else
+      flash[:errors] = ["Failed to update task '#{@task.name}'."]
+    end
+    redirect_to :action => 'list', :filter=>params[:filter]
   end
 
   private
