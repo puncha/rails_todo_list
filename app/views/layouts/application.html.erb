@@ -7,14 +7,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<nav>
-  <ul>
-    <li><%= link_to 'View all tasks', controller:'task', action:'list', filter:'all' %></li>
-    <li><%= link_to 'View uncompleted tasks', controller:'task', action:'list', filter:'uncompleted' %></li>
-    <li><%= link_to 'View completed tasks', controller:'task', action:'list', filter:'completed' %></li>
-  </ul>
-</nav>
-<%= yield %>
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class='panel panel-success'>
+        <p class="panel-heading">Actions</p>
+        <ul class="panel-body">
+          <li><%= link_to 'View all tasks', controller:'task', action:'list', filter:'all' %></li>
+          <li><%= link_to 'View uncompleted tasks', controller:'task', action:'list', filter:'uncompleted' %></li>
+          <li><%= link_to 'View completed tasks', controller:'task', action:'list', filter:'completed' %></li>
+          <li><%= link_to 'Create new task', controller:'task', action:'new' %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class='panel panel-info'>
+        <p class="panel-heading">Notice</p>
+        <p class="panel-body"><%= flash[:notice] %></p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class='panel panel-danger'>
+        <% errors = flash[:errors] || [] %>
+        <p class="panel-heading"><%= pluralize(errors.size,'Error') %></p>
+        <ul class="panel-body">
+          <% errors.each do |err| %>
+            <li><%= err %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <%= yield %>
+</div>
 </body>
 </html>

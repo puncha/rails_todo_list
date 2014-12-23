@@ -15,10 +15,19 @@ class TaskController < ApplicationController
   end
 
   def new
+    @task = Task.new
   end
 
   def create
+    if Task.create task_params()
+      flash[:notice] = "New task '#{task_params[:name]}' created."
+      redirect_to action:'list'
+    else
+      flash[:errors] = ["Failed to create new task '#{task_params[:name]}'."]
+      render 'new'
+    end
   end
+
 
   def delete
   end
@@ -31,4 +40,11 @@ class TaskController < ApplicationController
 
   def edit
   end
+
+  private
+
+    def task_params
+      params.require(:task).permit(:name, :completed)
+    end
+
 end

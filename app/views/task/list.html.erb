@@ -1,4 +1,4 @@
-<h1><%= params[:filter].camelize %> TODO Tasks</h1>
+<h1><%= (params[:filter] || '').camelize %> TODO Tasks</h1>
 <ul>
   <% @tasks.each do |tsk| %>
     <li><%= tsk.name %></li>

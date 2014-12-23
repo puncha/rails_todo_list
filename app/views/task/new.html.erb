@@ -1,2 +1,21 @@
-<h1>Task#new,</h1>
-<p>Find me in app/views/task/new,.html.erb</p>
+<%= form_for(:task,
+             url:{action:'create'},
+             html:{class:'form-horizontal'}) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-2">
+      <%= f.text_field :name, class:'form-control', placeholder: 'task name' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :completed, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-1">
+      <%= f.check_box :completed, class:'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+      <%= submit_tag 'Create Task', class:'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

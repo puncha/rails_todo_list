@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
 
   get 'task/index'
+
   get 'task/list'
   get 'task/show'
+
   get 'task/new'
-  get 'task/create'
+  post 'task/create'
+
   get 'task/delete'
-  get 'task/destroy'
-  get 'task/update'
+  delete 'task/destroy'
   get 'task/edit'
+  patch 'task/update'
 
   root 'entry#index'
   # The priority is based upon order of creation: first created -> highest priority.
