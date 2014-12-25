@@ -19,11 +19,13 @@ class TaskController < ApplicationController
   end
 
   def create
-    if Task.create task_params()
+    @task = Task.new task_params
+    if @task.save
       flash[:notice] = "New task '#{task_params[:name]}' created."
       redirect_to action:'list'
     else
       flash[:errors] = ["Failed to create new task '#{task_params[:name]}'."]
+      flash[:errors] += @task.errors.full_messages
       render 'new'
     end
   end
@@ -34,13 +36,14 @@ class TaskController < ApplicationController
   end
 
   def update
-    task = Task.find params[:id]
-    if task.update_attributes task_params
+    @task = Task.find params[:id]
+    if @task.update_attributes task_params
       flash[:notice] = 'Task is updated.'
       redirect_to action:'list'
     else
       flash[:errors] = ["Failed to update task '#{task_params[:name]}'."]
-      render 'update'
+      flash[:errors] += @task.errors.full_messages
+      render 'edit'
     end
   end
 
@@ -50,6 +53,7 @@ class TaskController < ApplicationController
       flash[:notice] = 'Task is updated.'
     else
       flash[:errors] = ["Failed to update task '#{@task.name}'."]
+      flash[:errors] += task.errors.full_messages
     end
     redirect_to :action => 'list', :filter=>params[:filter]
   end
