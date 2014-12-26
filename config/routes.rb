@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
 
-  get    'task/index'
-  get    'task/list'
-  get    'task/show'
-  get    'task/new'
-  post   'task/create'
-  get    'task/edit'
-  post   'task/update'
-  get 'task/delete' # TODO: Better to change it to verb 'DELETE'
+  resources :tasks do
+    member do
+      get :delete
+    end
+  end
 
   root 'entry#index'
 

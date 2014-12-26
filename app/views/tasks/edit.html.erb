@@ -1,0 +1,5 @@
+<%= form_for(:task,
+             :url=> task_url(params[:id]),
+             :html=> { :method=>:patch, :class=>'form-horizontal'}) do |f| %>
+  <%= render :partial => 'tasks/task_form', :locals => {f:f, submit_btn_text:'Update task'} %>
+<% end %>

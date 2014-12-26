@@ -1,0 +1,45 @@
+<h1><%= (params[:filter] || '').camelize %> TODO Tasks</h1>
+<div>
+  <% @tasks.each do |tsk| %>
+  <p>
+    <span class="glyphicon <%= tsk.completed ? 'glyphicon-saved' : 'glyphicon-unchecked' %>"></span>
+    <label>
+      <%= tsk.name %>
+    </label>
+    <span class="btn-group btn-group-sm">
+      <%= link_to 'Edit', edit_task_path(tsk.id), 'class'=>'btn btn-primary' %>
+      <%= link_to 'Delete', task_path(tsk.id, filter:params[:filter]), :method =>:delete, 'class'=>'btn btn-danger' %>
+    </span>
+    </p>
+  <% end %>
+</div>
+
+
+$document.delegate(rails.linkClickSelector, 'click.rails', function(e) {
+var link = $(this), method = link.data('method'), data = link.data('params'), metaClick = e.metaKey || e.ctrlKey;
+.....
+if (link.data('method')) {
+rails.handleMethod(link);
+return false;
+}
+});
+}
+handleMethod: function(link) {
+var href = rails.href(link),
+method = link.data('method'),
+target = link.attr('target'),
+csrfToken = $('meta[name=csrf-token]').attr('content'),
+csrfParam = $('meta[name=csrf-param]').attr('content'),
+form = $('
+<form method="post" action="' + href + '"></form>'),
+metadataInput = '<input name="_method" value="' + method + '" type="hidden"/>';
+
+if (csrfParam !== undefined && csrfToken !== undefined) {
+metadataInput += '<input name="' + csrfParam + '" value="' + csrfToken + '" type="hidden"/>';
+}
+
+if (target) { form.attr('target', target); }
+
+form.hide().append(metadataInput).appendTo('body');
+form.submit();
+},
