@@ -1,15 +1,30 @@
-<h1><%= (params[:filter] || '').camelize %> TODO Tasks</h1>
-<div>
-  <% @tasks.each do |tsk| %>
-  <p>
-    <span class="glyphicon <%= tsk.completed ? 'glyphicon-saved' : 'glyphicon-unchecked' %>"></span>
-    <label>
-      <%= tsk.name %>
-    </label>
-    <span class="btn-group btn-group-sm">
-      <%= link_to 'Edit', edit_task_path(tsk.id), 'class'=>'btn btn-primary' %>
-      <%= link_to 'Delete', task_path(tsk.id, filter:params[:filter]), :method =>:delete, 'class'=>'btn btn-danger' %>
-    </span>
-    </p>
+<span class="h1">Tasks   </span>
+<%= link_to 'create new', new_task_path, class:'btn btn-primary' %>
+<hr/>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Task</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |tsk| %>
+    <tr>
+      <td>
+        <span class="glyphicon <%= tsk.completed ? 'glyphicon-saved' : 'glyphicon-unchecked' %>"></span>
+        <label><%= tsk.name %></label>
+      </td>
+      <td>
+        <div class="btn-group btn-group">
+          <%= link_to 'Edit', edit_task_path(tsk.id), 'class'=>'btn btn-primary' %>
+          <%= link_to 'Delete', task_path(tsk.id, filter:params[:filter]), :method =>:delete, 'class'=>'btn btn-danger' %>
+        </div>
+      </td>
+    </tr>
   <% end %>
-</div>
+  </tbody>
+</table>

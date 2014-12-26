@@ -74,7 +74,7 @@ class UsersController < ApplicationController
       cookies[:username] = user[:username]
       cookies[:password] = user[:password]
       session[:username] = dbUser.username
-      flash[:notice] = '#{session[:username]}, you are successfully logged in.'
+      flash[:notice] = "#{session[:username]}, you are successfully logged in."
       redirect_to '/'
     else
       cookies[:username] = cookies[:password] = nil
