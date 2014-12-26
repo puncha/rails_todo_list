@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   respond_to :html, :xml, :json
   skip_before_filter :verify_authenticity_token, if: :json_request?
+  before_action :check_logged_in, :except => []
 
   def index
     filter = params[:filter] || 'all'
