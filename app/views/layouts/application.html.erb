@@ -11,6 +11,26 @@
   <div class="row">
     <div class="col-md-3">
       <div class='panel panel-success'>
+        <p class="panel-heading">User</p>
+        <ul class="panel-body">
+          <% username = session[:username] %>
+          <% if not username %>
+            <li>
+              <%= link_to 'log in', login_users_path, 'class'=> 'btn btn-default' %>
+            </li>
+          <% else %>
+            <li>
+              <%= username %>
+              <span class="btn-group btn-group-sm">
+                <%= link_to 'log out', logout_users_path, 'class'=> 'btn btn-danger' %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class='panel panel-success'>
         <p class="panel-heading">Actions</p>
         <ul class="panel-body">
           <li><%= link_to 'View all tasks', tasks_path(filter:'all') %></li>
@@ -20,13 +40,13 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class='panel panel-info'>
         <p class="panel-heading">Notice</p>
         <p class="panel-body"><%= flash[:notice] %></p>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class='panel panel-danger'>
         <% errors = flash[:errors] || [] %>
         <p class="panel-heading"><%= pluralize(errors.size,'Error') %></p>

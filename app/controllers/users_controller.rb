@@ -61,6 +61,35 @@ class UsersController < ApplicationController
     end
   end
 
+  def login
+    @user = User.new
+    @user.username = cookies[:username]
+    @user.password = cookies[:password]
+  end
+
+  def attempt_login
+    user = user_params
+    dbUser = User.where(user).first
+    if dbUser
+      cookies[:username] = user[:username]
+      cookies[:password] = user[:password]
+      session[:username] = dbUser.username
+      flash[:notice] = '#{session[:username]}, you are successfully logged in.'
+      redirect_to '/'
+    else
+      cookies[:username] = cookies[:password] = nil
+      flash[:errors] = ['Username or password is wrong. Please retry.']
+      @user = User.new user
+      @user.errors.add (:username)
+      @user.errors.add (:password)
+      render 'login'
+    end
+  end
+
+  def logout
+    session[:username] = nil
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
