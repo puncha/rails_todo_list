@@ -48,6 +48,7 @@
     <a class="navbar-brand" href="/">Rails Todo List</a>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
+        <!--Tasks-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">View Tasks <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -56,8 +57,8 @@
             <li><%= link_to 'View completed tasks', tasks_path(filter:'completed') %></li>
           </ul>
         </li>
-        <li><%= link_to 'Create new task', new_task_path %></li>
-        <li><%= link_to '', new_task_path %></li>
+        <!--Users-->
+        <li><%= link_to 'Manage users', users_path %></li>
       </ul>
     </div>
   </div>
