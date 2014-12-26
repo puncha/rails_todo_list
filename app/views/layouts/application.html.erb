@@ -65,28 +65,25 @@
 </div>
 
 <div class="container">
-      <div class='panel panel-primary'>
-        <p class="panel-heading">User</p>
-        <ul class="panel-body" style="list-style: none;">
-          <% username = session[:username] %>
-          <% if not username %>
-            <li>
-              <%= link_to 'log in', login_users_path, 'class'=> 'btn btn-default' %>
-            </li>
-          <% else %>
-            <li>
-              <%= username %>
-              <span class="btn-group btn-group-sm">
-                <%= link_to 'log out', logout_users_path, 'class'=> 'btn btn-danger' %>
-              </span>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-
-  <%= render partial: 'partials/flash_errors' %>
-
-
+  <div class='panel panel-primary'>
+    <p class="panel-heading">User</p>
+    <ul class="panel-body" style="list-style: none;">
+      <% username = session[:username] %>
+      <% if not username %>
+        <li>
+          <%= link_to 'log in', login_users_path, 'class'=> 'btn btn-default' %>
+        </li>
+      <% else %>
+        <li>
+          <%= username %>
+          <span class="btn-group btn-group-sm">
+            <%= link_to 'log out', logout_users_path, 'class'=> 'btn btn-danger' %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <%= bootstrap_flash_errors %>
   <div class="row">
     <!--
         <div class="col-lg-3">
@@ -102,7 +99,7 @@
         </div>
         -->
     <div class="col-lg-12">
-      <%= render partial: 'partials/flash_notice' %>
+      <%= bootstrap_flash_notice %>
       <%= yield %>
     </div>
   </div><!--/row-->
